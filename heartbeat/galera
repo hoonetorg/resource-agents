@@ -605,6 +605,7 @@ galera_promote()
         bootstrap=$(is_bootstrap)
 
         if ocf_is_true $bootstrap; then
+            sed -i 's/^safe_to_bootstrap:.*/safe_to_bootstrap: 1/' ${OCF_RESKEY_datadir}/grastate.dat
             ocf_log info "Node <${NODENAME}> is bootstrapping the cluster"
             extra_opts="--wsrep-cluster-address=gcomm://"
         else
